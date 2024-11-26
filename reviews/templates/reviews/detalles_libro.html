@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Detalles del Libro</title>
+    <title>{{ libro.titulo }}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'reviews/css/detalles_libro.css' %}">
 </head>
@@ -16,6 +16,8 @@
 
     <footer>
         <p>&copy; LibreriaConLibros 2024</p>
+        <a href="http://127.0.0.1:8000/resenas/" class="ir-a-resenas">RESEÑAS</a>
+		<a href="http://127.0.0.1:8000/libros/" class="ir-a-resenas">VOLVER A LIBROS</a>
     </footer>
 </body>
 </html>

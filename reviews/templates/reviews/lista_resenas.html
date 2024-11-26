@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Reseñas</title>
+    <title>RESEÑAS</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'reviews/css/lista_resenas.css' %}">
 </head>
 <body>
-    <h1>Lista de Reseñas</h1>
+    <h1>RESEÑAS</h1>
     <ul>
         {% for resena in resenas %}
             <li>
@@ -21,6 +21,7 @@
 
     <footer>
         <p>&copy; LibreriaConLibros 2024</p>
+		<a href="http://127.0.0.1:8000/libros/" class="ir-a-libro">LIBROS</a>
     </footer>
 </body>
 </html>
