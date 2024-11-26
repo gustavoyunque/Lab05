@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Reseñas</title>
+</head>
+<body>
+    <h1>Lista de Reseñas</h1>
+    <ul>
+        {% for resena in resenas %}
+            <li>
+                <strong>{{ resena.titulo }}</strong> - {{ resena.texto }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
