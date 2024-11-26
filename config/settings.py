@@ -55,8 +55,8 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [],  # Otras rutas personalizadas, si las tienes
+        'APP_DIRS': True,  # Habilita la búsqueda en las carpetas templates de las apps
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
