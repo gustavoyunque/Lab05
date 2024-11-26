@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Lista de Reseñas</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'reviews/css/lista_resenas.css' %}">
 </head>
 <body>
     <h1>Lista de Reseñas</h1>
     <ul>
         {% for resena in resenas %}
             <li>
-                <strong>{{ resena.titulo }}</strong> - {{ resena.texto }}
+                <p><strong>- Libro:</strong> {{ resena.libro.titulo }}</p>
+                <p><strong>- Usuario:</strong> {{ resena.nombre_usuario }}</p>
+                <p><strong>- Calificación:</strong> <span class="calificacion">{{ resena.calificacion }}</span></p>
+                <p><strong>- Reseña:</strong> {{ resena.texto }}</p>
             </li>
         {% endfor %}
     </ul>
+
+    <footer>
+        <p>&copy; LibreriaConLibros 2024</p>
+    </footer>
 </body>
 </html>

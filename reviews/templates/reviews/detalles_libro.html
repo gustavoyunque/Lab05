@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Detalles del Libro</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'reviews/css/detalles_libro.css' %}">
 </head>
 <body>
-    <h1>{{ libro.titulo }}</h1>
-    <p><strong>Autor:</strong> {{ libro.autor }}</p>
-    <p><strong>Fecha de Publicación:</strong> {{ libro.fecha_publicacion }}</p>
-    <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
+    <div class="container">
+        <h1>{{ libro.titulo }}</h1>
+        <p><strong>Autor:</strong> {{ libro.autor }}</p>
+        <p><strong>Fecha de Publicación:</strong> {{ libro.fecha_publicacion }}</p>
+        <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
+    </div>
+
+    <footer>
+        <p>&copy; LibreriaConLibros 2024</p>
+    </footer>
 </body>
 </html>
