@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalles del Libro</title>
+</head>
+<body>
+    <h1>{{ libro.titulo }}</h1>
+    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+    <p><strong>Descripción:</strong> {{ libro.descripcion }}</p>
+    <a href="{% url 'lista_libros' %}">Volver a la lista</a>
+</body>
+</html>
