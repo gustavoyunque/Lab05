@@ -5,8 +5,32 @@
     <title>LISTA DE LIBROS</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'reviews/css/libros.css' %}">
+    <style>
+        .enlaces-superiores {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .enlaces-superiores a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .enlaces-superiores a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
+    <div class="enlaces-superiores">
+        <a href="{% url 'crear_libro' %}">Añadir Libro</a>
+        <a href="{% url 'crear_usuario' %}">Registrar Usuario</a>
+    </div>
     <h1>~ LIBROS ~</h1>
     <ul>
         {% for libro in libros %}
@@ -16,9 +40,17 @@
         {% endfor %}
     </ul>
 	
-	<footer>
+     <h1>Bienvenido {{ usuario_nombre }}</h1>
+    <a href="{% url 'logout_usuario' %}">Cerrar Sesión</a>
+    <h2>Lista de Libros</h2>
+    <ul>
+        {% for libro in libros %}
+            <li>{{ libro.titulo }}</li>
+        {% endfor %}
+    </ul>
+    <footer>
         <p>&copy; LibreriaConLibros 2024</p>
-		<a href="http://127.0.0.1:8000/resenas/" class="ir-a-resenas">RESEÑAS</a>
+        <a href="http://127.0.0.1:8000/resenas/" class="ir-a-resenas">RESEÑAS</a>
     </footer>
 </body>
 </html>
