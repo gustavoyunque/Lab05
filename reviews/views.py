@@ -7,11 +7,11 @@ from django.contrib.auth.hashers import check_password
 from django.http import HttpResponseRedirect
 
 def lista_libros(request):
-    usuario_nombre = request.session.get('usuario_nombre', None)  # Obtiene el nombre del usuario si esta en sesion
+    usuario_nombre = request.session.get('usuario_nombre', None)  
     libros = Libro.objects.all()
     return render(request, 'reviews/lista_libros.html', {
         'libros': libros,
-        'usuario_nombre': usuario_nombre  # Puede ser `None` si no esta autenticado
+        'usuario_nombre': usuario_nombre  
     })
 
 def detalles_libro(request, pk):
@@ -37,11 +37,11 @@ def crear_usuario(request):
         formulario = FormularioUsuario(request.POST)
         if formulario.is_valid():
             usuario = formulario.save(commit=False)
-            usuario.contrasena = make_password(usuario.contrasena)  # Encripta la contrasena
+            usuario.contrasena = make_password(usuario.contrasena)  
             usuario.save()
-            return redirect('login_usuario')  # Redirige al login despues de registrarse
+            return redirect('login_usuario')  
         else:
-            print(formulario.errors)  # Esto es para ayudarte a depurar los errores del formulario
+            print(formulario.errors)  
     else:
         formulario = FormularioUsuario()
 
