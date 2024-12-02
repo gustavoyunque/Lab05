@@ -3,7 +3,7 @@ from django.db import models
 class Usuario(models.Model):
     nombre_usuario = models.CharField(max_length=100)
     correo = models.EmailField(unique=True)
-    contraseña = models.CharField(max_length=128)
+    contrasena = models.CharField(max_length=128)  # Campo para la contrasena
 
     def __str__(self):
         return self.nombre_usuario

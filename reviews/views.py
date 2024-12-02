@@ -7,10 +7,12 @@ from django.contrib.auth.hashers import check_password
 from django.http import HttpResponseRedirect
 
 def lista_libros(request):
-    if 'usuario_id' not in request.session:
-        return HttpResponseRedirect('/login/')  # Redirige si no está autenticado
+    usuario_nombre = request.session.get('usuario_nombre', None)  # Obtiene el nombre del usuario si esta en sesion
     libros = Libro.objects.all()
-    return render(request, 'reviews/lista_libros.html', {'libros': libros, 'usuario_nombre': request.session.get('usuario_nombre')})
+    return render(request, 'reviews/lista_libros.html', {
+        'libros': libros,
+        'usuario_nombre': usuario_nombre  # Puede ser `None` si no esta autenticado
+    })
 
 def detalles_libro(request, pk):
     libro = get_object_or_404(Libro, pk=pk)
@@ -35,35 +37,35 @@ def crear_usuario(request):
         formulario = FormularioUsuario(request.POST)
         if formulario.is_valid():
             usuario = formulario.save(commit=False)
-            # Hash de la contrasena
-            usuario.contrasena = make_password(usuario.contrasena)
+            usuario.contrasena = make_password(usuario.contrasena)  # Encripta la contrasena
             usuario.save()
-            return redirect('login_usuario')  # Redirige al login
+            return redirect('login_usuario')  # Redirige al login despues de registrarse
+        else:
+            print(formulario.errors)  # Esto es para ayudarte a depurar los errores del formulario
     else:
         formulario = FormularioUsuario()
-    return render(request, 'reviews/formulario_usuario.html', {'formulario': formulario})
 
-def lista_usuarios(request):
-    usuarios = Usuario.objects.all()
-    return render(request, 'reviews/lista_usuarios.html', {'usuarios': usuarios})
+    return render(request, 'reviews/formulario_usuario.html', {'formulario': formulario})
 
 def login_usuario(request):
     if request.method == 'POST':
-        correo = request.POST['correo']
-        contrasena = request.POST['contrasena']
+        correo = request.POST.get('correo')
+        contrasena = request.POST.get('contrasena')
+
         try:
             usuario = Usuario.objects.get(correo=correo)
             if check_password(contrasena, usuario.contrasena):
-                # Usa la sesión para autenticar
+                # Guardar el nombre de usuario en la sesion
                 request.session['usuario_id'] = usuario.id
                 request.session['usuario_nombre'] = usuario.nombre_usuario
-                return redirect('lista_libros')  # Redirige a la lista de libros
+                return redirect('lista_libros')  # Redirige al listado de libros si el login es exitoso
             else:
                 return render(request, 'reviews/login.html', {'error': 'Contrasena incorrecta'})
         except Usuario.DoesNotExist:
             return render(request, 'reviews/login.html', {'error': 'Usuario no encontrado'})
+
     return render(request, 'reviews/login.html')
 
 def logout_usuario(request):
-    request.session.flush()  # Limpia la sesión
+    request.session.flush()  # Limpia la sesion
     return redirect('login_usuario')

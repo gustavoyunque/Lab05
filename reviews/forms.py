@@ -4,13 +4,12 @@ from .models import Usuario, Libro
 class FormularioUsuario(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['nombre_usuario', 'correo', 'contraseña']
+        fields = ['nombre_usuario', 'correo', 'contrasena']
         widgets = {
-            'contraseña': forms.PasswordInput(),
+            'contrasena': forms.PasswordInput(),
             'correo': forms.EmailInput(attrs={'class': 'form-control'}),
             'nombre_usuario': forms.TextInput(attrs={'class': 'form-control'})
         }
-
 
 class FormularioLibro(forms.ModelForm):
     class Meta:

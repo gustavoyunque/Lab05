@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>LISTA DE LIBROS</title>
+    <title>Lista de Libros</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'reviews/css/libros.css' %}">
     <style>
@@ -28,29 +28,29 @@
 </head>
 <body>
     <div class="enlaces-superiores">
+        {% if usuario_nombre %}
+            <span>Hola, {{ usuario_nombre }}</span>
+            <a href="{% url 'logout_usuario' %}">Cerrar Sesión</a>
+        {% else %}
+            <a href="{% url 'login_usuario' %}">Iniciar Sesión</a>
+            <a href="{% url 'crear_usuario' %}">Registrar Usuario</a>
+        {% endif %}
         <a href="{% url 'crear_libro' %}">Añadir Libro</a>
-        <a href="{% url 'crear_usuario' %}">Registrar Usuario</a>
     </div>
-    <h1>~ LIBROS ~</h1>
+
+    <h1>Lista de Libros</h1>
     <ul>
         {% for libro in libros %}
             <li>
                 <a href="{% url 'detalles_libro' libro.id %}">{{ libro.titulo }}</a>
+                - {{ libro.autor }}
             </li>
         {% endfor %}
     </ul>
-	
-     <h1>Bienvenido {{ usuario_nombre }}</h1>
-    <a href="{% url 'logout_usuario' %}">Cerrar Sesión</a>
-    <h2>Lista de Libros</h2>
-    <ul>
-        {% for libro in libros %}
-            <li>{{ libro.titulo }}</li>
-        {% endfor %}
-    </ul>
+
     <footer>
         <p>&copy; LibreriaConLibros 2024</p>
-        <a href="http://127.0.0.1:8000/resenas/" class="ir-a-resenas">RESEÑAS</a>
+        <a href="{% url 'lista_resenas' %}" class="ir-a-resenas">Reseñas</a>
     </footer>
 </body>
 </html>
