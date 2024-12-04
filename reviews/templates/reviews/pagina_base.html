@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/0/04/Libreria_San_Gines.jpg");
+        }
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .content {
+            margin-top: 80px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .content h1 {
+            font-size: 48px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .content a {
+            display: block;
+            width: 80%;
+            max-width: 400px;
+            margin: 10px auto;
+            padding: 20px 0;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .content a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        {% if usuario_nombre %}
+            <span>Bienvenido, {{ usuario_nombre }}</span>
+            <a href="{% url 'logout_usuario' %}">Cerrar Sesión</a>
+        {% else %}
+            <a href="{% url 'login_usuario' %}">Iniciar Sesión</a>
+            <a href="{% url 'crear_usuario' %}">Registrarse</a>
+        {% endif %}
+    </div>
+    <div class="content">
+        <h1>Bienvenido a LibreriaConLibros !!</h1>
+        <a href="{% url 'lista_libros' %}">LIBROS</a>
+        <a href="{% url 'lista_resenas' %}">RESEÑAS</a>
+    </div>
+</body>
+</html>

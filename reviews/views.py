@@ -69,3 +69,8 @@ def login_usuario(request):
 def logout_usuario(request):
     request.session.flush()  # Limpia la sesion
     return redirect('login_usuario')
+
+
+def pagina_base(request):
+    usuario_nombre = request.session.get('usuario_nombre', None)
+    return render(request, 'reviews/pagina_base.html', {'usuario_nombre': usuario_nombre})
