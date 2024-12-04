@@ -30,6 +30,6 @@ class FormularioResena(forms.ModelForm):
             'libro': forms.Select(attrs={'class': 'form-control'}),
             'nombre_usuario': forms.TextInput(attrs={'class': 'form-control'}),
             'texto': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
-            'calificacion': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'max': 5}),
+            'calificacion': forms.NumberInput(attrs={'class': 'form-control', 'min': 0, 'max': 10}),
         }
 
