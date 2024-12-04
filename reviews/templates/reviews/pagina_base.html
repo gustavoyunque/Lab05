@@ -14,10 +14,13 @@
             align-items: center;
             min-height: 100vh;
             background-image: url("https://upload.wikimedia.org/wikipedia/commons/0/04/Libreria_San_Gines.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         .navbar {
             width: 100%;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -25,17 +28,17 @@
             color: white;
             position: fixed;
             top: 0;
-            left: 0;
+            left: 20;
         }
         .navbar a {
             color: white;
             text-decoration: none;
-            margin-left: 15px;
-            padding: 5px 10px;
+            margin-left: 0px;
+            padding: 5px 5px;
             border-radius: 5px;
         }
         .navbar a:hover {
-            background-color: #575757;
+            background-color: rgba(255, 255, 255, 0.3);
         }
         .content {
             margin-top: 80px;
@@ -50,7 +53,11 @@
         .content h1 {
             font-size: 48px;
             margin-bottom: 40px;
-            color: #333;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
         }
         .content a {
             display: block;
@@ -58,7 +65,7 @@
             max-width: 400px;
             margin: 10px auto;
             padding: 20px 0;
-            background-color: #007bff;
+            background-color: #439b34;
             color: white;
             text-decoration: none;
             border-radius: 8px;
@@ -68,8 +75,18 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .content a:hover {
-            background-color: #0056b3;
+            background-color: #73a636;
         }
+		footer {
+			text-align: center;
+			padding: 20px;
+			background-color: #333;
+			color: white;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			margin-top: 50px;
+		}
     </style>
 </head>
 <body>
@@ -87,5 +104,8 @@
         <a href="{% url 'lista_libros' %}">LIBROS</a>
         <a href="{% url 'lista_resenas' %}">RESEÑAS</a>
     </div>
+	<footer>
+        <p>&copy; LibreriaConLibros 2024</p>
+    </footer>
 </body>
 </html>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro, Resena, Usuario  
-from .forms import FormularioUsuario, FormularioLibro
+from .forms import FormularioUsuario, FormularioLibro, FormularioResena
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login
 from django.contrib.auth.hashers import check_password
@@ -19,8 +19,12 @@ def detalles_libro(request, pk):
     return render(request, 'reviews/detalles_libro.html', {'libro': libro})
 
 def lista_resenas(request):
+    usuario_nombre = request.session.get('usuario_nombre', None)
     resenas = Resena.objects.all()
-    return render(request, 'reviews/lista_resenas.html', {'resenas': resenas})
+    return render(request, 'reviews/lista_resenas.html', {
+        'resenas': resenas,
+        'usuario_nombre': usuario_nombre,
+    })
 
 def crear_libro(request):
     if request.method == 'POST':
@@ -55,10 +59,9 @@ def login_usuario(request):
         try:
             usuario = Usuario.objects.get(correo=correo)
             if check_password(contrasena, usuario.contrasena):
-                # Guardar el nombre de usuario en la sesion
                 request.session['usuario_id'] = usuario.id
                 request.session['usuario_nombre'] = usuario.nombre_usuario
-                return redirect('lista_libros')  # Redirige al listado de libros si el login es exitoso
+                return redirect('lista_libros') 
             else:
                 return render(request, 'reviews/login.html', {'error': 'Contrasena incorrecta'})
         except Usuario.DoesNotExist:
@@ -67,10 +70,25 @@ def login_usuario(request):
     return render(request, 'reviews/login.html')
 
 def logout_usuario(request):
-    request.session.flush()  # Limpia la sesion
+    request.session.flush() 
     return redirect('login_usuario')
 
 
 def pagina_base(request):
     usuario_nombre = request.session.get('usuario_nombre', None)
     return render(request, 'reviews/pagina_base.html', {'usuario_nombre': usuario_nombre})
+
+def crear_resena(request):
+    usuario_nombre = request.session.get('usuario_nombre', None)
+    if request.method == 'POST':
+        formulario = FormularioResena(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('lista_resenas')  
+    else:
+        formulario = FormularioResena()
+    
+    return render(request, 'reviews/formulario_resena.html', {
+        'formulario': formulario,
+        'usuario_nombre': usuario_nombre,
+    })

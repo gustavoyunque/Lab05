@@ -5,8 +5,39 @@
     <title>RESEÑAS</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'reviews/css/lista_resenas.css' %}">
+	<style>
+        .enlaces-superiores {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .enlaces-superiores a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .enlaces-superiores a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
+	<div class="enlaces-superiores">
+    {% if usuario_nombre %}
+        <span>Hola, {{ usuario_nombre }}</span>
+        <a href="{% url 'logout_usuario' %}">Cerrar Sesión</a>
+    {% else %}
+        <a href="{% url 'login_usuario' %}">Iniciar Sesión</a>
+        <a href="{% url 'crear_usuario' %}">Registrar Usuario</a>
+    {% endif %}
+    <a href="{% url 'crear_libro' %}">Añadir Libro</a>
+    <a href="{% url 'crear_resena' %}">Añadir Reseña</a>
+</div>
     <h1>RESEÑAS</h1>
     <ul>
         {% for resena in resenas %}

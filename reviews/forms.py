@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario, Libro
+from .models import Usuario, Libro, Resena
 
 class FormularioUsuario(forms.ModelForm):
     class Meta:
@@ -21,3 +21,15 @@ class FormularioLibro(forms.ModelForm):
             'fecha_publicacion': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'isbn': forms.TextInput(attrs={'class': 'form-control'})
         }
+
+class FormularioResena(forms.ModelForm):
+    class Meta:
+        model = Resena
+        fields = ['libro', 'nombre_usuario', 'texto', 'calificacion']
+        widgets = {
+            'libro': forms.Select(attrs={'class': 'form-control'}),
+            'nombre_usuario': forms.TextInput(attrs={'class': 'form-control'}),
+            'texto': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'calificacion': forms.NumberInput(attrs={'class': 'form-control', 'min': 1, 'max': 5}),
+        }
+
